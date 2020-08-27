@@ -11,13 +11,47 @@ configurable URL curcuit breaker for nginx/openresty
 当有连续多个请求时, 请求数量大于一个阀值则可以认为此 domain+path 的接口服务高风险 或失败请求.这里需要做熔断来降级此接口,防止雪崩扩大.
 
 # Design
-
+![./design.png](design)
 
 # Notice
  为了能正常计算 程序的执行时间, REQUEST_TIMEOUT 要小于cgi/fastcgi/uwsgi/proxy_pass 的最大超时也小于 nginx 对应的超时时间. 否则执行时间计算不准确.
 
 
 # Test
+```
+#macbook pro 上
+ab -k -c 300 -n5000 127.0.0.1/ | grep 'Requests per second:'
 
+#nginx.conf 
+bash-3.2$ ab -k -c 300 -n5000 127.0.0.1/ | grep 'Requests per second:'
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+Requests per second:    2754.05 [#/sec] (mean)
+
+
+#benchmark.nginx.conf:  openresty with URL-fuse 
+bash-3.2$ ab -k -c 300 -n5000 127.0.0.1/ | grep 'Requests per second:'
+Completed 500 requests
+Completed 1000 requests
+Completed 1500 requests
+Completed 2000 requests
+Completed 2500 requests
+Completed 3000 requests
+Completed 3500 requests
+Completed 4000 requests
+Completed 4500 requests
+Completed 5000 requests
+Finished 5000 requests
+Requests per second:    2493.06 [#/sec] (mean)
+```
 
 
