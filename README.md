@@ -11,7 +11,7 @@ configurable URL curcuit breaker for nginx/openresty
 当有连续多个请求时, 请求数量大于一个阀值则可以认为此 domain+path 的接口服务高风险 或失败请求.这里需要做熔断来降级此接口,防止雪崩扩大.
 
 # Design
-![./design.png](design)
+![design](./design.png '设计')
 
 # Notice
  为了能正常计算 程序的执行时间, REQUEST_TIMEOUT 要小于cgi/fastcgi/uwsgi/proxy_pass 的最大超时也小于 nginx 对应的超时时间. 否则执行时间计算不准确.
