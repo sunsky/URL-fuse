@@ -1,5 +1,6 @@
 # URL-fuse powered by open-resty
-configurable URL curcuit breaker for nginx/openresty 
+a configurable URL curcuit breaker for nginx/openresty 
+这是一个可配置的 URL断路器(熔断器), 基于 nginx openresty.
 
 # Why
 我们不希望整体服务被个别接口的慢请求拖死. 因为慢请求会不断堆积, 使服务出现超时499或502, 最后504.
@@ -14,7 +15,10 @@ configurable URL curcuit breaker for nginx/openresty
 ![design](./design.png '设计')
 
 # Notice
- 为了能正常计算 程序的执行时间, REQUEST_TIMEOUT 要小于cgi/fastcgi/uwsgi/proxy_pass 的最大超时也小于 nginx 对应的超时时间. 否则执行时间计算不准确.
+ - 为了能正常计算 程序的执行时间, REQUEST_TIMEOUT 要小于cgi/fastcgi/uwsgi/proxy_pass 的最大超时也小于 nginx 对应的超时时间. 否则执行时间计算不准确.
+ - 如果在熔断之前瞬间有大量请求打入 nginx, 则服务依然可能会雪崩.
+ - 具体配置请参考 nginx.conf.
+ 
 
 
 # Test
