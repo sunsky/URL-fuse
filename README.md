@@ -1,4 +1,4 @@
-# URL-fuse powered by open-resty
+# URL-fuse powered by openresty
 a configurable URL curcuit breaker for nginx/openresty 
 
 这是一个可灵活配置的URL断路器(熔断器), 基于 nginx openresty.
