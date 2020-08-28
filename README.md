@@ -1,9 +1,11 @@
 # URL-fuse powered by open-resty
 a configurable URL curcuit breaker for nginx/openresty 
+
 这是一个可灵活配置的URL断路器(熔断器), 基于 nginx openresty.
 
 # Why
 我们不希望整体服务被个别接口的慢请求拖死. 因为慢请求会不断堆积, 使服务出现超时499或502, 最后504. 
+
 同时你也可以将糟糕的慢请求(比如15秒内连续10次5秒超时)做成服务健康报警, 这样能提前减少流量增加时的雪崩概率.
 
 
